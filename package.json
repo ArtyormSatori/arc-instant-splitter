@@ -1,0 +1,26 @@
+{
+  "name": "arc-instant-splitter",
+  "version": "1.0.0",
+  "description": "Arc Instant Splitter for Arc Microgrants Hackathon - Built with Arc Studio",
+  "main": "index.js",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "dev": "node scripts/serve_local.js"
+  },
+  "keywords": [
+    "arc",
+    "usdc",
+    "circle",
+    "hackathon",
+    "smart-contract",
+    "micropayments"
+  ],
+  "author": "TAVIS",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^6.1.2",
+    "ethers": "^6.17.0",
+    "hardhat": "^2.29.1"
+  }
+}

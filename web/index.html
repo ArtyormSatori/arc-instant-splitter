@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arc Instant Splitter | Built with Arc Studio</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="ethers.umd.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="brand">
+        <div class="logo-icon">⚡</div>
+        <div>
+          <h1>Arc Instant Splitter</h1>
+          <span class="badge-sub">Arc Microgrants • Built with Arc Studio</span>
+        </div>
+      </div>
+      <div class="wallet-bar">
+        <button id="switchNetworkBtn" class="btn btn-secondary">Switch to Arc Mainnet</button>
+        <button id="connectWalletBtn" class="btn btn-primary">Connect Wallet</button>
+      </div>
+    </header>
+
+    <div class="network-banner" id="networkBanner">
+      <span class="status-dot disconnected" id="networkDot"></span>
+      <span id="networkText">Not Connected to Arc Mainnet (Chain ID 5042)</span>
+    </div>
+
+    <main class="card">
+      <div class="form-group">
+        <label for="contractAddress">ArcSplitter Contract Address</label>
+        <div class="input-with-hint">
+          <input type="text" id="contractAddress" placeholder="Paste deployed ArcSplitter address on Arc Mainnet..." />
+          <small class="hint">Deploy via Arc Studio or paste your verified Arc Mainnet address.</small>
+        </div>
+      </div>
+
+      <div class="tab-container">
+        <button class="tab-btn active" id="tabNative" onclick="switchMode('native')">Native USDC Split</button>
+        <button class="tab-btn" id="tabERC20" onclick="switchMode('erc20')">ERC-20 USDC Split</button>
+      </div>
+
+      <div class="mode-info" id="modeInfo">
+        <strong>⚡ Native USDC Mode:</strong> Direct transfer using Arc's native gas token. No approval transaction needed. Zero friction.
+      </div>
+
+      <div class="form-group">
+        <label for="splitAmount">Total Amount (USDC)</label>
+        <input type="number" id="splitAmount" min="0.000001" step="0.01" value="0.05" />
+        <small class="hint">Recommended for mainnet test verification: 0.05 USDC</small>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group flex-1">
+          <label for="recipientA">Recipient A (Address)</label>
+          <input type="text" id="recipientA" placeholder="0x..." value="0x48bfe6393ad88f7cead1e9553e3e0a4788802595" />
+        </div>
+        <div class="form-group flex-1">
+          <label for="recipientB">Recipient B (Address)</label>
+          <input type="text" id="recipientB" placeholder="0x..." />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="slider-header">
+          <label>Split Ratio (Basis Points)</label>
+          <span class="ratio-display" id="ratioDisplay">50% / 50% (5000 bps)</span>
+        </div>
+        <input type="range" id="ratioSlider" min="0" max="10000" step="500" value="5000" />
+      </div>
+
+      <div class="preview-box">
+        <div class="preview-item">
+          <span class="preview-label">Recipient A Receives:</span>
+          <span class="preview-val" id="previewA">0.025 USDC</span>
+        </div>
+        <div class="preview-item">
+          <span class="preview-label">Recipient B Receives:</span>
+          <span class="preview-val" id="previewB">0.025 USDC</span>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button id="approveBtn" class="btn btn-warning" style="display: none;">Approve ERC-20 USDC</button>
+        <button id="executeBtn" class="btn btn-accent">Execute Split Payment</button>
+      </div>
+
+      <div class="status-card" id="statusCard" style="display: none;">
+        <div class="status-header">
+          <span class="status-icon" id="statusIcon">⏳</span>
+          <span id="statusTitle">Processing Transaction...</span>
+        </div>
+        <div class="status-body" id="statusBody"></div>
+        <div class="tx-link-container" id="txLinkContainer" style="display: none;">
+          <a href="#" id="txLink" target="_blank" rel="noopener noreferrer">View on Arc Explorer ↗</a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-grid">
+        <div><strong>Chain ID:</strong> 5042</div>
+        <div><strong>RPC:</strong> https://rpc.mainnet.arc.io</div>
+        <div><strong>Gas Token:</strong> USDC</div>
+        <div><strong>Explorer:</strong> <a href="https://explorer.arc.io" target="_blank">explorer.arc.io</a></div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
